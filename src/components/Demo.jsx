@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchData, ArticleOptions } from "../services/fetchData";
 import { copy, linkIcon, loader, tick } from "../assets";
-import { useLazyGetSummaryQuery } from '../services/Article';
+import { useLazyGetSummaryQuery } from "../services/Article";
 
 const Demo = () => {
 
@@ -20,14 +19,55 @@ const Demo = () => {
   
   //Created a useState{sample,setSample} to feed data from api 
   const [sample,setSample]=useState([]);  
-  const getArticle=async()=>{
-    const url = `https://article-extractor-and-summarizer.p.rapidapi.com/summarize?url=${article.url}`; //article url coming from input tag
-    const data = await fetchData(url, ArticleOptions);
+
+
+  // const getArticle=async()=>{
+  //   const url = `https://article-extractor-and-summarizer.p.rapidapi.com/summarize?url=${article.url}`; //article url coming from input tag
+  //   const data = await fetchData(url, ArticleOptions);
     
-    setSample(data.summary);
+  //   setSample(data.summary);
     
     
+  // }
+
+  const getArticles = async() => {
+
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer gn5qdZjjzRNWqnjHwju0APOaOoUVrCKu'
+      },
+      body: JSON.stringify({sourceType: 'URL', source: article.url})
+    };
+    
+    console.log(article.url);
+
+    const response = await fetch('https://api.ai21.com/studio/v1/summarize', options);
+
+    
+    try{
+      if (response.ok){
+      const data = await response.json();
+      // Update the state of the article with the fetched summary
+      setArticle({summary: data.summary });
+      return data; // Return the data if needed
+    }
+    
+    else {
+      // Handle the case where the response is not okay (e.g., an error response)
+      console.error('Error:', response.statusText);
+      return null; // Return null or handle the error as needed
+    }
   }
+  
+  catch (error) {
+    console.error('Error:', error);
+    return null; // Return null or handle the error as needed
+  }
+
+}
   
 
   // Load data from localStorage on mount
@@ -52,8 +92,11 @@ const Demo = () => {
 
     if (existingArticle) return setArticle(existingArticle);
 
-    const { data } = await getSummary({ articleUrl: article.url });
-    if (data?.summary) {
+    //const { data } = await getSummary({ articleUrl: article.url });
+    const data = await getArticles();
+
+    if (data) {
+      console.log("Yes")
       const newArticle = { ...article, summary: data.summary };
       const updatedAllArticles = [newArticle, ...allArticles];
 
@@ -96,7 +139,7 @@ const Demo = () => {
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         e.preventDefault(); // Prevent the default form submission
-                        getArticle(); // Call your submit function here
+                        getArticles(); // Call your submit function here
                       }
                     }}
                     required
@@ -138,14 +181,16 @@ const Demo = () => {
       {/* Result */}
       <div style={{ marginTop: '10px', maxWidth: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '3' }}>
-        <h2 style={{ fontFamily: 'Ubuntu', fontWeight: 'bold', color: '#666', fontSize: '1.5rem' }}>
+      {/* <div style={{ display: 'flex', flexDirection: 'column', gap: '3' }}> */}
+        {/* <h2 style={{ fontFamily: 'Ubuntu', fontWeight: 'bold', color: '#666', fontSize: '1.5rem' }}>
           Article<span style={{ color: '#0077FF' }}>Summary</span>
-        </h2>
-        <div style={{ borderWidth: '1px', borderColor: '#ccc', borderStyle: 'solid', padding: '10px' }}>
+        </h2> */}
+        {/* <div style={{ borderWidth: '1px', borderColor: '#ccc', borderStyle: 'solid', padding: '10px' }}> */}
           <p>{sample}</p>
-        </div>
+        {/* </div> */}
       </div>
+  
+  
   {isFetching ? ( //IF fetch display loader
     <img src={loader} alt="loading" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
   ) : error ? ( //If error then print this below text
@@ -160,7 +205,7 @@ const Demo = () => {
     article.summary && (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3' }}>
         <h2 style={{ fontFamily: 'Ubuntu', fontWeight: 'bold', color: '#666', fontSize: '1.5rem' }}>
-          Article<span style={{ color: '#0077FF' }}>&lt;Summary&gt;</span>
+          Article<span style={{ color: '#0077FF' }}>Summary</span>
         </h2>
         <div style={{ borderWidth: '1px', borderColor: '#ccc', borderStyle: 'solid', padding: '10px' }}>
           <p>{article.summary}</p>
@@ -168,7 +213,7 @@ const Demo = () => {
       </div>
     )
   )}
-</div>
+{/* </div> */}
 </section>
 );
     }
