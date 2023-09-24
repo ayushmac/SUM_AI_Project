@@ -1,0 +1,97 @@
+.about-container {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  padding: 150px 20px;
+
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-img {
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+}
+
+.about-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 50%;
+  align-items: start;
+  justify-content: center;
+}
+
+.about-title {
+  font-family: "Space Grotesk", "sans-serif";
+  font-weight: bolder;
+  font-size: 40px;
+  background-image: linear-gradient(to right, #ffc107, #ff9800, #ff5722);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+.about-desc {
+  font-family: "Ubuntu", "sans-serif";
+  text-align: justify;
+  hyphens: auto;
+  font-size: large;
+}
+
+.card-desc {
+  font-family: "Ubuntu", "sans-serif";
+  text-align: justify;
+  hyphens: auto;
+  font-size: large;
+
+  font-weight: bolder;
+}
+
+.sub-desc {
+  font-family: "Ubuntu", "sans-serif";
+  text-align: justify;
+  hyphens: auto;
+  background-image: linear-gradient(to right, #ffc107, #ff9800, #ff5722);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: x-large;
+}
+/*responsive design*/
+/* mobile devices */
+@media (max-width: 576px) {
+  .about-title {
+    text-align: center;
+  }
+
+  .about-container {
+    gap: 30px;
+  }
+
+  .about-content-container {
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+/* small devices  */
+@media (min-width: 576px) and (max-width: 768px) {
+  .about-title {
+    text-align: center;
+  }
+
+  .about-container {
+    gap: 30px;
+  }
+
+  .about-content-container {
+    padding: 20px;
+    width: 100%;
+  }
+}

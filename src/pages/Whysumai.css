@@ -1,0 +1,104 @@
+.whysumai-container {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 150px 20px;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.whysumai-title {
+  font-family: "Space Grotesk", "sans-serif";
+  font-weight: bolder;
+  font-size: 60px;
+  /* color: #ff5722; */
+  background-image: linear-gradient(to right, #ffc107, #ff9800, #ff5722);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+.whysumai-cards {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 400px;
+  height: max-content;
+  border: 1px solid #ff5722;
+  border-radius: 20px;
+  padding: 30px 20px;
+  /* z-index: -1; */
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  /* background-color: #f8f8ff; */
+  backdrop-filter: blur(5px);
+}
+
+.card-container:hover {
+  cursor: pointer;
+  background-color: #f8f8ff;
+  backdrop-filter: none;
+}
+
+.card-img1 {
+  background-image: url("../assets/whyaifirst.jpg");
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+  border: 3px solid #ff5722;
+}
+
+.card-img2 {
+  background-image: url("../assets/whyaisecond.jpg");
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+  border: 3px solid #ff5722;
+}
+
+.card-img3 {
+  background-image: url("../assets/whyaithird.png");
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+  border: 3px solid #ff5722;
+}
+
+.card-title {
+  font-family: "Space Grotesk", "sans-serif";
+  font-weight: bolder;
+  font-size: xx-large;
+  color: #ff5722;
+  text-align: center;
+}
+
+.sub-desc {
+  font-family: "Ubuntu", "sans-serif";
+  text-align: justify;
+  hyphens: auto;
+  font-size: x-large;
+  color: #ff5722;
+  font-weight: bolder;
+}

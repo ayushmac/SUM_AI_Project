@@ -1,22 +1,23 @@
-import React from 'react'; 
-import './App.css';
-import Hero from './components/Hero';
-import Demo from './components/Demo';
-
+import React from "react";
+import "./App.css";
+import Hero from "./components/Hero";
+import Demo from "./components/Demo";
+import Navbar from "./components/Navbar";
+import About from "./pages/About";
+import Whyai from "./pages/Whyai";
+// import Whysumai from "./pages/whysumai";
 
 const App = () => {
   return (
-    <main>
-      <div className='main'>
-        <div className='gradient' />
-      </div>
+    <div className="app">
+      <Navbar />
+      <About />
+      {/* <Whysumai /> */}
+      <Whyai />
+      <Hero />
+      <Demo />
+    </div>
+  );
+};
 
-      <div className='app'>
-        <Hero />
-        <Demo />
-      </div>
-    </main>
-  )
-}
-
-export default App
+export default App;
